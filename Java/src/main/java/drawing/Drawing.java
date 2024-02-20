@@ -30,10 +30,16 @@ public class Drawing {
      */
     public void draw(String format, String filename) {
         // TODO: Do you notice any issues here?
+        // Duplicated code for different file formats
+        // Solution: Extract a WriterFactory class that returns a Writer instance based on the input format. 
+        // The draw method can use it to obtain the appropriate Writer 
         if (format.equals("jpeg")) {
             try (Writer writer = new JPEGWriter(filename + ".jpeg")) {
                 for (Shape shape : this.shapes) {
                     // TODO: What is the issue of the behavior here?
+                    // Expose and Rely on Shape Internals, tight coupling
+                    // Solution: Shape interface, with a method that accepts a Writer directly, 
+                    // and then each Shape implementation can internally decide how to represent itself and draw to the writer.
                     Line[] lines = shape.toLines();
                     shape.draw(writer, lines);
                 }
