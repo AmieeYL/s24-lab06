@@ -37,8 +37,8 @@ public class Drawing {
             try (Writer writer = new JPEGWriter(filename + ".jpeg")) {
                 for (Shape shape : this.shapes) {
                     // TODO: What is the issue of the behavior here?
-                    // Expose and Rely on Shape Internals, tight coupling
-                    // Solution: Shape interface, with a method that accepts a Writer directly, 
+                    // Expose and Rely on Shape Internals
+                    // Solution: Shape interface or abstract class, with a method that accepts a Writer directly, 
                     // and then each Shape implementation can internally decide how to represent itself and draw to the writer.
                     Line[] lines = shape.toLines();
                     shape.draw(writer, lines);
